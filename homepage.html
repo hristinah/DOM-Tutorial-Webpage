@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <style>
+        html,body 
+        {
+            font-family: 'Lato', sans-serif;
+            color: #200B2E; 
+            height: 100%;
+            width: 100%;
+            margin:0px;
+            padding:0px;
+            overflow: auto;
+        }
+        
+
+        #header
+        {
+            font-size: 40px;
+            width: 84%;
+            text-align: center;
+            margin: 0px 0px 3%  14.7%;  
+            padding: 15px 9px; 
+            background-image: url("hbg.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+ 
+        h1 ,h2, p
+        {
+            font-family: 'Lato', sans-serif;
+            width: 75%;
+            min-width:500px;
+            margin: 0px 0px 3%  20%;   
+            padding: 0px ;
+            position: relative;
+        
+        }
+
+       h1 {
+           font-size: 35px;
+           margin-top:2%;
+           text-align: center;
+           }
+
+       h2 {
+           font-size: 27px;
+           text-decoration: underline;
+           margin-bottom: 1%;
+          }
+
+       p {
+           font-size: 20px; 
+          text-align: justify;
+          }
+            
+        li{
+            font-family: 'Lato', sans-serif;
+             width: 70%;
+             margin: 0px 0px 5px  18%;   
+            font-size: 20px; 
+        }
+       
+        strong i
+        {
+            max-width:100%;   
+            display: inline-flex;
+            font-size: 115%;
+            text-align:left ;
+            border:solid 1px #200B2E;
+            padding: 3px; 
+            background-color: #D1BCFF;
+        }
+
+      
+
+        ins,  code strong
+        {
+            display: block;
+            font-size: 95%;  
+            text-align: left;
+            border:dashed 1px #200B2E;
+            margin:2% 0%;
+            padding: 3px; 
+            text-decoration: none;
+        }
+        
+    
+        .example
+        {
+            position:relative;
+            height: 40%;
+            width: 75%;
+            margin:3% 0px 7%  22%; 
+        }
+        textarea, iframe
+        {
+            padding: 5px;
+            margin: 2.5%;
+            width: 41%;
+            height: 100%;
+            border:solid 3px #200B2E;
+            
+        }
+
+        textarea
+        {
+            white-space: nowrap;
+            overflow: scroll; 
+            
+        }
+        
+        img
+        {
+            border:dotted 3px #200B2E; 
+        }
+        
+        table
+        {
+            position: relative;
+            width: 500px; 
+            margin: 0px 0px 0px 20%;
+            font-size: 27px;  
+        }
+
+        td
+        {
+            padding : 0px 10px;
+        }
+
+        a
+        {
+            text-decoration: none;
+        }
+        #sidebar
+        {
+            height: 100%; 
+            width: 15%; 
+            min-width: 100px;
+            margin: 0px;
+            position: fixed; 
+            z-index: 1;
+            display: block;
+            background-image: url("bg.jpg");
+            background-attachment: fixed;
+            background-size: contain;
+            
+        }
+
+        #menu
+        {
+            width: 80%; 
+            min-width: 90px;
+            padding :5px 0px;
+            border:solid 3px white;
+            -moz-border-radius: 10px;
+            border-radius: 10px; 
+            list-style-type: none;
+            margin: 20px auto; 
+        }
+
+       #menu li a
+        {
+            margin: 8px auto;
+            display: block;
+            padding: 0.25em 0.25em;
+            background-color: white;
+            -moz-border-radius: 10px;
+            border-radius: 10px; 
+            text-align: center; 
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            color:#200B2E;
+            min-width: 50px;
+        }
+
+        #menu li ol
+        {
+            width: 80%;
+            margin: 0px auto;
+            padding :0px 0px;
+            list-style-type: none;
+        }
+
+        #menu li ol li 
+        {
+            width: 100%;
+            margin: 0px auto;
+            
+        }
+
+        #menu li ol li a 
+        {
+            margin: 6px auto;
+            display: block;
+            padding: 0.2em 0.2em;
+            background-color: #D1BCFF;
+            -moz-border-radius: 10px;
+            border-radius: 10px; 
+            text-align: center; 
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            color:#200B2E;
+            min-width: 50px;
+        }
+
+        #menu li a:hover
+        {
+            background-color:#D1BCFF;
+        }
+
+        #menu li ol li a:hover 
+        {
+            background-color:white;
+        }
+
+    </style>
+
+
+<script>
+    function main()
+    {
+        var p = document.getElementById("menu").children;
+        console.log(p.length);
+        
+        for (var i=0; i<p.length; i++)
+        {
+                var c=p[i].children;
+                if(c.length==2)
+            {   c[1].style.display = 'none';
+                c[1].addEventListener('click',function(event)
+                    {
+                        event.stopPropagation();
+                    });
+
+
+
+                p[i].addEventListener('click',function(event)
+                {
+                    var style = event.currentTarget.children[1].style;
+                     if (style.display=='none')
+                        style.display = 'block';
+                    else
+                        style.display = 'none';
+                
+                });
+            }
+        }
+    }
+</script>
+
+</head>
+
+<body onload="main()">
+    <div id="sidebar">
+        <ul id="menu">
+             <li><a href="#1" >DOM възли</a> </li>
+             <li><a href="#2" >HTML елемент</a> </li>
+             <li><a href="#3" >DOM дървото</a></li>
+             <li><a href="#4" >Работа с HTML</a>
+                    <ol>
+                        <li><a href="#scontent">Съдържание</a></li>
+                        <li><a href="#sprop">Свойства</a></li>
+                        <li><a href="#sattr" >Атрибути</a></li>
+                    </ol>
+            </li>
+             <li><a href="#5" >Работа с CSS</a> </li>
+             <li><a href="#6" >Create & Remove</a></li>
+             <li><a href="#7" >Събития</a> 
+                <ol>
+                    <li><a href="#shd">HTML и DOM</a></li>
+                    <li><a href="#sp">Предимства</a></li>
+                    <li><a href="#sanon">Анонимна функция</a></li>
+                    <li><a href="#sevent">Event</a></li>
+                </ol>
+            </li>
+             <li><a href="#8" >Event spread</a>
+                <ol>
+                    <li><a href="#scap">Capturing</a></li>
+                    <li><a href="#sbub">Bubbling</a></li>
+                    <li><a href="#suse">Употреба</a></li>
+                    <li><a href="#sd">Delegation</a></li>
+                </ol>
+            </li>
+             <li><a href="#9" >Ресурси</a> </li>
+             <li><a href="#10" >За мен</a> </li>
+        </ul>
+    </div>
+
+
+         <h1 id="header"><pre> DOM дърво
+  обхождане 
+и манипулация</pre></h1>
+
+         <p >
+                <b>DOM (Document Object Model)</b> е API, който представя и взаимодейства с всеки HTML или XML документ като с <b>дърво, където всеки възел е част от документа</b> (например елемент, текстов низ или коментар).
+                Той е широко използван в мрежата, тъй като веднъж зареден,моделът позволява на скрипта да  взаимодейства с целия документ. Така възлите могат да се : <b>създават, преместват, променят,</b> и да им се добавят<b> Event listener-и </b> които се задействат при появата на дадено събитие.
+                 Тази страница ще ви научи как да правите всичко това.                
+         </p>
+        <section id="1">
+         <h1>DOM възли</h1>
+          <p>
+                Според стандарта <b>W3C HTML DOM</b> всичко в HTML документа е възел:<br>
+                Целият документ е <b>възел document</b><br>
+                Всеки HTML елемент e <b>възел element</b><br>
+                Текстът вътре в HTML елемент e <b>text възел</b><br>
+                Всеки HTML атрибут е <b>attribute възел </b><br>
+                Всички коментари са <b>възли за коментари</b> <br>
+                Възлите имат <b>йерархична връзка помежду си. </b><br>
+                Техният <b>корен е обекта document</b> и от него можем да достъпим цялото съдържание.<br><br>
+                <img src="pic_htmltree.gif" width="100%" height="50%">
+                <a href="#9">[1]</a>
+          </p>
+        </section> 
+
+        <section id="2">
+          <h1>Намиране на HTML елементи</h1>
+
+          <p>
+                <strong><i>var x=document.getElementById( “id”);</i></strong>   -   връща обект, съответстващ на  HTML елемента с търсеното id , или null, ако такъв обект не съществува<br><br>
+
+                Останалите методи <i>(без последния)</i> връщат  <strong>HTMLCollection</strong> – списък от HTML елементи.<br><br>
+                <strong><i>var collection = document.getElementsByTagName("p");</i></strong> - елементите със съответния таг.<br><br> Поотделно ги достъпваме с<br>
+               <code> for (i = 0; i <=(collection.length-1); i++){<br>	
+                  collection[i].style.backgroundColor = "red"; }</code><br> или<br><br>
+                <strong><i>document.getElementsByTagName("P") .namedItem("myElement");</i></strong> - взима само елемента със съответните id и таг<br><br>
+                <strong><i>document.getElementsByClassName("example");</i></strong> - взима по класа<br><br>
+                <strong><i>document.querySelectorAll("p.example");</i></strong> - взима всички елементи, отговарящи на дадения CSS селектор, тук  paragraph от клас example<br>
+                <ins>  Чрез <strong>HTMLCollection</strong> обаче <strong>не можем</strong> да променим структурата на дървото. За тази цел ползваме методите от <a href="#6" >Create & Remove</a>.  </ins>
+                <a href="#9">[1],[8]</a>
+    
+          </p>
+        </section>
+
+        <section id="3">
+          <h1>Обхождане на DOM дървото</h1>
+          <p>
+                Можем да обхождаме дървото и чрез вече открити обекти, на база <strong>“роднински връзки“</strong><br><br>
+                  Нека  <code>var x=document.getElementById( “id”);</code>  <br><br>
+                <strong><i>var xp = x.parentNode;</i></strong> - връща родителя на елемента<br><br>
+                <strong><i>var xc = x.childNodes;</i></strong> - връща списък от децата на елемента, в реда им от html кода<br><br>
+                
+                <ins> <strong>querySelectorAll</strong> и <strong>childNodes</strong> връщат <strong>NodeList</strong>, различаващ се от HTMLCollection по това, че може да съдържа <strong>attribute и text възли</strong>, но достъпът до елементите му е <strong>само по индекс</strong>.<br>
+                Освен това важно е да забележа,че <strong>промени в DOM дървото</strong> ще променят какво връща <strong>childNodes</strong>  но не  и <strong>querySelectorAll</strong> </ins>
+                <a href="#9">[1],[2],[8]</a>
+          </p>
+        </section>
+
+        <section id="4">
+          <h1>Работа с HTML през DOM</h1>
+          
+            <h2 id="scontent">Промяна на съдържанието на елемент</h2>
+
+            <p>Нека имаме параграф с id="test" и съдържание<br>
+            <code> 
+                This element   contains &lt;span&gt; an inner span  &lt;/span&gt;. 
+            </code><br>
+            и ползваме<br>
+            <code> 
+            var e=document.getElementById(“test”);
+            </code><br><br>
+            <strong><i>e. innerHTML</i></strong> -  ще ни върне <b>точното HTML съдържание :</b> <br><code> 
+                "This element   contains &lt;span&gt; an inner span  &lt;/span&gt;."
+                </code> <br>
+            и може да променим това съдържание с<br>
+            <strong>e.innerHTML = "New contents!";</strong>  <br><br>
+            Ако се интересуваме <b>само от текста</b> вътре в елемента, без таговете<br>
+            <strong><i>e.innerText</i></strong>  - ще върне <br>
+            <code> "This element contains an inner span."</code> <br>
+            <a href="#9">[1],[2]</a>
+            </p>
+             
+            <h2 id="sprop">Промяна на DOM свойство</h2>
+
+            <p>
+                    Някои свойства на DOM обекта <strong>съответстват на атрибутите</strong> в HTML, като тези атрибути <strong>инициализират свойствата</strong>  при зареждане на дървото.<br><br>
+
+                    
+                    <strong><i>e.property</i></strong>   - ни дава достъп до свойство property,  <br>
+                    като възможните свойства за елемента и типа им може да намерим чрез <strong>devtools</strong> конзолата<br><br>
+                   <ins style="text-align:left;">
+                    Така например взимаме стойността на падащ списък с id=”select1” <br>
+                    document.getElementById(”select1”).value; <br><br>
+                    и променяме изображението в  даден img <br>
+                    document.getElementById("myImage").src = "landscape.jpg";<br>
+                   </ins>  
+                   <a href="#9">[1],[8]</a> 
+            </p>
+          
+            <h2 id="sattr">Промяна на атрибутите</h2>
+            <p>
+                    Самият атрибут взимаме чрез съответният му <strong>attribute възел</strong> с<br>
+                    <strong><i>var attr= element.getAttributeNode(attributeName);</i></strong> <br>
+                    <strong> attr.name</strong> - ни дава името<br>
+                    <strong>attr.value</strong> -  ни дава стойността<br>
+					Тези възли също се инициализират при зареждане на дървото. <br><br>
+                    Може да вземем и <strong>всички атрибути</strong> на елемента с<br>
+                    <strong><i> var attribures = element.attributes</i></strong> <br> и обхождаме възлите с<br>
+                    <code> for (i = 0; i < attributes.length; i++) { attributes[i]}</code><br><br>
+                    
+                    <ins >Стойността на атрибут винаги е String, и промяна в нея веднага ще засегне съответното му свойство</ins>  <br>
+                    <a href="#9">[1],[8]</a>
+            </p> 
+            
+            <h2>Други функции за работа с атрибути</h2>
+
+            <p>
+                    <strong><i>element.getAttribute(attributeName)</i></strong> - връща стойността му ,или null ако такъв атрибут няма<br><br>
+                    <strong><i>element.hasAttribute(attributeName)</i></strong> - връща true, ако атрибута съществува<br><br>
+                    <strong><i>element.setAttribute(attributeName, attributeValue)</i></strong>-  променя стойността на атрибута, ако такъв съществува, в противен случай добавя атрибута със съответната стойност<br><br>
+                    <strong><i>element.removeAttribute(attributeName)</i></strong>  - премахва атрибута за елемента <br><br> 
+                    <a href="#9">[2]</a>  
+            </p>
+        </section>
+
+        <section id="5">
+            <h1>Промяна на стила на елемента</h1>
+
+            <p>
+                    <strong><i>Element.style</i></strong> свойството връща обект <strong>CSSStyleDeclaration</strong> - списък на всички стилове за този елемент, със стойности взети от <b>inline</b> декларираният атрибут style.<br>
+                    <ins>Това свойство обаче не ни дава информация за правилата за стила разположени във външен файл или в секцията head.</ins><br><br>
+                    Ползваме го с<br>
+                    <strong><i>Element.style.property = value;</i></strong>  - за да променим съответния стил , без да засягаме останалите.<br>
+                    Промените тук имат <strong>най-висок приоритет</strong> (inline).<br>
+                    <ins style="text-align:left;">Например  Element.style.color = "blue";</ins>
+                    <strong>Важно</strong> е да забележим, че свойствата на style <strong>могат да се различават</strong> по име (но не и по стойност)от свойствата в CSS<br>
+                    Може да ги сравните на линковете <a href="https://www.w3schools.com/jsref/dom_obj_style.asp" target="_blank">DOM Style</a> и  <a href="https://www.quackit.com/css/properties/" target="_blank">CSS</a>, но разликите са главно в свойства с по няколко думи: липсата на тирета и първа главна букви за думите след първата  <br>
+                    <a href="#9">[1],[4],[8]</a>
+                    <ins>Някои основни свойства:</ins> 
+                    
+                          <table   >
+                            <tr>
+                              <th  ><u>В DOM :</u> </th>
+                              <th ><u>В CSS :</u> </th>
+                            </tr>
+                            <tr>
+                                    <td >color</td>
+                                    <td >color</td>
+                            </tr>
+                            <tr>
+                                    <td>textDecoration</td>
+                                    <td>text-decoration</td>
+                            </tr>
+                            <tr>
+                                    <td>textAlign</td>
+                                    <td>text-align</td>
+                            </tr>
+                            <tr>
+                                    <td>font</td>
+                                    <td>font</td>
+                            </tr>
+                            <tr>
+                                    <td> background</td>
+                                    <td> background</td>
+                            </tr>
+                            <tr>
+                                    <td>backgroundImage</td>
+                                    <td>background-image</td>
+                            </tr>
+                            <tr>
+                                    <td>display</td>
+                                    <td>display</td>
+                            </tr>
+                            <tr>
+                                    <td>margin</td>
+                                    <td>margin</td>
+                            </tr>
+                            <tr>
+                                    <td>marginLeft</td>
+                                    <td>margin-left</td>
+                            </tr>
+                            <tr>
+                                    <td>border</td>
+                                    <td>border</td>
+                            </tr>
+                            <tr>
+                                    <td>borderTop</td>
+                                    <td>border-top</td>
+                            </tr>
+                            <tr>
+                                    <td>padding</td>
+                                    <td>padding</td>
+                            </tr>
+                            <tr>
+                                    <td>paddingRight</td>
+                                    <td>padding-right</td>
+                            </tr>
+                            <tr>
+                                    <td>position</td>
+                                    <td>position</td>
+                            </tr>
+                            <tr>
+                                    <td>right</td>
+                                    <td>right</td>
+                            </tr>
+                            <tr>
+                                    <td>top</td>
+                                    <td>top</td>
+                            </tr>
+                        </table ><br>   
+            </p>   
+            <p><ins>Нека приложим досега наученото,като добавим проста анимация към страницата, при натискане на  бутон</ins> </p>
+        </section>
+
+        <p class="example">
+        <textarea >
+<!DOCTYPE html>
+<html>
+<style>
+
+    html, body {
+        height: 95%;
+        width: 100%;
+        margin: 0;    
+    }
+
+    #container {
+        width: 80%;
+        height: 70%;
+        position: relative;
+        }
+
+    #animate {
+        width: 50%;
+        height: 80%;
+        position: absolute;
+        left: 65%;
+    } 
+
+</style>
+<body>
+
+    <p><button onclick="myMove()">Come here!</button></p> 
+    
+    <div id ="container">
+        <img id ="animate" src="kitty-static.gif">
+    </div>
+
+    <script>
+        function myMove() {
+        //взимаме елемента, който ще движим
+        var elem = document.getElementById("animate"); 
+    
+        //променяме картинката на движещо се коте
+        elem.setAttribute("src", "kittyrun.gif");
+        
+        var pos = 65;
+        // пуска функцията frame през  определения интервал от време
+        var id = setInterval(frame, 5);  
+            function frame() {
+                if (pos <= 20) {
+                    //като стигнем докрая се връщаме към началната картинка и спираме извикването на функцията   
+                    elem.src="kitty-static.gif"; 
+                    clearInterval(id); 
+                    } 
+                else {
+                    // променяме позицията чрез style    
+                    pos=pos-0.15; 
+                    elem.style.left = pos + "%"; 
+                    }
+            }
+    
+        }
+    </script>
+
+</body>
+</html>
+    
+        </textarea>
+
+        <iframe 
+            width="50%"
+            height="50%"
+            src="example1\kittyrun.html">
+        </iframe>
+        </p>
+    
+
+        <section id="6">
+        <h1>Създаване и изтриване на HTML елементи</h1>
+        <p>
+                Както отбелязахме  по-горе , обектът document ни дава достъп до цялото DOM дърво, като чрез него може дори да променяме структурата<br><br>
+
+                Базов пример за това е <strong>write()</strong> метода<br>
+                Ако в  скриптов елемент имаме кода<br>
+                <strong><i>document.write("&lt;h1&gt;Hello World&lt;/h1&gt;");</i></strong> - чрез него пишем директно в <b>изходния поток</b> на HTML, <b>от позицията</b> в която е скрипта. <br>
+                Ползваме този метод  главно при тестване на страницата.<br>
+                <ins>Ще изчистим цялото останало съдържание на страницата, ако извикаме <strong>document.write()</strong> след като тя вече е заредена</ins><br>
+                
+                
+                <strong><i>var a=document.createElement(“nodename”)</i></strong> -  създава възел element от искания тип<br><br>
+                Позиционираме този възел чрез :<br>
+                <strong><i>parent.appendChild(a);</i></strong>   - добавяме го като последно дете на дадения възел<br><br>
+               
+                <strong><i>parent.insertBefore(a, existingNode);</i></strong> - като дете на node, разположено точно преди детето му existingNode<i>(ако е null, метода е еквивалентен на appendChild )</i><br><br>
+                
+                <strong><i>parent.replaceChild(a, oldNode);</i></strong> - изтриваме детето oldNode и на негово място идва новият ни възел <br><br><br>
+                А ако искаме само да премахне даден възел b, извикваме от родителя му<br>
+                <strong><i>parent.removeChild(b);</i></strong><br>
+                <ins>Последните два метода  връщат възел – изтрития елемент, 
+                или null , ако възелът който сме искали да изтрием не съществува. 
+                Така имаме опцията да вмъкнем изтритите елементи на друго място в дървото.</ins>
+                <a href="#9">[1],[8]</a>
+                <ins>Нека допълним предишният пример , като добавим причина котето да се движи. </ins>
+                
+                
+        </p>
+        </section>
+
+        <p class="example">
+        <textarea >
+<!DOCTYPE html>
+<html>
+<style>
+
+    html, body  {
+        height: 95%;
+        width: 100%;
+        margin: 0;
+    }
+    
+    #container {
+        width: 80%;
+        height: 70%;
+        position: relative;
+    }
+
+    #animate {
+        width: 50%;
+        height: 80%;
+        position: absolute;
+        left: 65%;
+    } 
+
+</style>
+<body>
+
+    <p><button onclick="myMove()">Come here!</button></p> 
+    
+    <div id ="container">
+        <img id ="animate" src="kitty-static.gif">
+    </div>
+
+    <script>
+        function myMove() {
+        var cat = document.getElementById("animate"); 
+
+        //създаваме възел fish който е img
+        var fish=document.createElement("img"); 
+    
+        fish.src="fish.gif";
+        fish.style.width= "15%";
+        fish.style.height= "15%";
+        fish.style.top= "20%";
+        fish.style.left= "5%";
+        fish.style.position="absolute";
+        fish.style.display="inline";
+
+        //вмъкваме го в дървото
+        document.getElementById("container").insertBefore(fish, cat); 
+        
+        var pos = 65;
+        cat.setAttribute("src", "kittyrun.gif"); 
+        var id = setInterval(frame, 5);
+
+            function frame() {
+                if (pos <= 20) {
+                        cat.src="kitty-static.gif"; 
+
+                        //махаме го от дървото
+                        document.getElementById("container").removeChild(fish); 
+                    
+                        clearInterval(id);
+                        } 
+                else {
+                        pos=pos-0.15; 
+                        cat.style.left = pos + "%"; 
+                        }
+            } 
+            
+        }
+        
+    </script>
+
+</body>
+</html>
+        </textarea>
+
+        <iframe 
+            width="50%"
+            height="50%"
+            src="example2\getthefish.html">
+        </iframe>
+        </p>
+
+        <section id="7">
+                <h1>Събития</h1>
+                <h2 id="shd">Събития в HTML и DOM </h2>
+                <p>
+                        Ако потребителят натисне бутон на уеб страница, може да искаме да отговорим на това действие чрез функция <b>func1()</b>.<br> 
+                        Задаваме това да се случи чрез <br>
+                        <strong><i>&lt;button id="b1"   onclick="func1">Press me &lt;/button></i></strong><br>
+                        Атрибутът onclick  е <strong>event handler/listener</strong>. Браузърът получава събития от операционната система всеки път, когато нещо се случи. За това събитие се намира на кои event handlers отговаря (fires), след което всеки от тях изпълнява зададената му <strong>функция- callback </strong>.
+                        <br><br>
+                        Същото можем да направим много по-добре чрез DOM по два начина:<br><br>
+                        - чрез  свойства  съдържащи event handler код<br>
+                        <strong><i>document.getElementById("b1").onclick = func1;</i></strong><br><br>
+                        - чрез метод приемащ като параметър име на събитието и обработващият го callback<br>
+                        <strong><i>document.getElementById("b1"). addEventListener("click", func1);</i></strong><br><br>
+                        Така пазим пазим JavaScript кода отделно от HTML<br><br>
+
+                        Ако искаме да премахнем някоя callback-функция за даден event listener , ползваме<br>
+                        <strong><i>document.getElementById("b1"). removeEventListener('click',funcName);</i></strong>
+                        
+                </p>
+                <h2 id="sp">Предимсвото на DOM </h2 id>
+                <p>
+                        Важно е да отбележим,  че addEventListener ни позволява да регистрираме <strong>няколко  callback-а</strong>  за един и същ слушател.<br>
+                        При  <br>   
+                        <code><strong>myElement.onclick = functionA;<br>
+                            myElement.onclick = functionB;</strong></code>
+                        ще се изпълни само functionB,<br><br> докато при<br>
+                        <code><strong>myElement.addEventListener('click', functionA);<br>
+                            myElement.addEventListener('click', functionB);</strong></code>
+                        при 'click' ще се извършат и двете функции<br>
+                        
+                        
+                        
+                        
+                </p>
+                <h2>Често използвани събития</h2>
+                <p>
+                        Нека дадем имената на някои от по-често използваните събития, като съонвентите  им <strong>event handlers се получават</strong> като отпред им добавим <strong>представката "on".</strong><br>
+                        <table >
+                                <tr>
+                                        <td>click</td>
+                                        <td>когато се кликне върху елемент</td>
+                                </tr>
+                                <tr>
+                                        <td>mouseover</td>
+                                        <td>когато мишката се премести върху елемент</td>
+                                </tr>
+                                <tr>
+                                        <td>mouseout</td>
+                                        <td>когато мишката се премести от елемент</td>
+                                </tr>
+                                <tr>
+                                        <td>submit</td>
+                                        <td>когато  submit-нем form </td>
+                                </tr>
+                                <tr>
+                                        <td>keydown</td>
+                                        <td>когато се натисне клавиш</td>
+                                </tr>
+                                <tr>
+                                        <td>change</td>
+                                        <td> когато стойността на елемент е променена</td>
+                                </tr>
+                                <tr>
+                                        <td>load</td>
+                                        <td> когато обектът е зареден</td>
+                                </tr>
+                        </table >
+                </p>
+                <h2 id="sanon">Анонимна функция и параметри</h2>
+                <p>
+                        На event handler можеда подадем и <strong>анонимна функция:</strong><br>
+                        <code><strong>myElement.onmouseover = function() {.….}</strong></code>
+                        или<br>
+                        <code><strong>myElement.addEventListener('mouseover ', function() {.….});</strong></code>
+                        
+                        За да ползваме <strong>функция с параметри като callback</strong>, използвме анонимна функция, която извиква исканата с определени параметри.<br>
+                        <code><strong>element.addEventListener("click", function(){ myFunction(p1, p2); });</strong></code>
+                        
+                </p>
+                <h2 id="sevent">Event обекта</h2>
+                <p>
+                        Полезно е да имаме информация за самото <b>събитие</b>, което обработваме. Тези данни се пазят в  <strong>Event обекта</strong>, като той автоматично се подава на всеки event handler. <br>
+                        Ползваме го по следния начин:<br>
+                        <code><strong>function colChange(e) { e.target.style.color = “red”; }  <br> 
+                                myElement.onclick= colChange;</strong></code>   - сменяме цвета на текста само на кликнатият елемент<br>
+                       
+                        Тук „e“ е  <strong>Event обекта</strong>, и <strong>e.target</strong> е елемента, върху който е кликнато.<br><br>
+                        
+                        <stong>Често използвани</stong> свойства/методи при работа с Event са:<br><br>
+                        <strong><i>event.target</i></strong> - Връща елемента,задействал събитието<br><br>
+                        <strong><i>event.currentTarget</i></strong> - Връща елемента, чиито EventListener е задействал събитието<br><br>
+                        <strong><i>event.timeStamp</i></strong> - връща броя на милисекундите от зареждането на документа, до създаването на конкретното събитие<br><br>
+                        <strong><i>event.preventDefault()</i></strong> - действието по подразбиране, принадлежащо на събитието, няма да се случи, стига събитието да има свойство  „cancelable“. <br>
+                           Например  при кликане на "Submit" да не позволим да изпращане на  form
+                        или да не проследим URL адреса при кликане на връзка.<br>
+                        <a href="#9">[1],[3],[5]</a>
+
+                        <ins> Вече спокойно межем да работим с event listeners в примерната програма. <br>Ще добавим слушател, сменящ съдържанието на страницата при много кликане на бутона "Come here"<br> и опция да изключим този слушател при натискане на втория бутон.  </ins>
+                </p>
+                </section>
+
+        <p class="example" style="height: 50%">
+        <textarea >
+<!DOCTYPE html>
+<html>
+<style>
+    .
+    .
+    .
+    #pet { 
+    visibility: hidden;
+    }
+</style>
+
+<body>
+        <p><button id="b">Come here!</button></p> 
+        <p><button id="pet">Pet him</button></p> 
+            .
+            .
+            .
+    <script>
+
+        function myMove() {                    
+            .
+            .
+            .
+        }
+        
+
+        //променяме съдържанието на страницата
+        function myMove2(){
+            document.write("<button id='b'onclick='history.go(0)'>Refresh</button> <h1 id='h'>I don't like these games HUMAN !</h1>  <img id='i' src='madcat.jpg'  width='70%'  height='70%';> ");  
+            document.getElementById('b').style.display="block";
+            document.getElementById('b').style.margin="auto";
+            document.getElementById('h').style.textAlign="center";
+            document.getElementById('i').style.display="block";
+            document.getElementById('i').style.margin="auto";
+        }
+        
+        //колко пъти е натиснат бутона
+        var numclicks=0; 
+        
+        // функцията, която се пуска при натискане на бутона
+        function myFunction()   
+        {
+            document.getElementById("pet").style.visibility = "visible";
+            numclicks++;
+            if(numclicks==1) {myMove();}
+            if(numclicks==3) {myMove2();}
+        }
+        
+        //добавяме слушател за събитието click  бутон "come here"
+        document.getElementById("b").addEventListener("click", myFunction); 
+        
+        //махаме слушателя на  бутон "come here", ако е натиснат "pet him" бутона
+        document.getElementById("pet").addEventListener('click', function() {  
+            document.getElementById("b").removeEventListener("click", myFunction); 
+        });
+        
+    </script>
+                
+</body>
+</html>            
+
+        </textarea>
+
+        <iframe 
+                width="50%"
+                height="50%"
+                src="example3\madcat.html">
+        </iframe>
+        </p> 
+
+            <section id="8" style="overflow: hidden;">
+                        <h1>Event propagation</h1>
+                        <p >
+                                Когато събитие се задейства върху елемент  с родител ,съвременните браузъри могат да изпълняват две различни фази – <strong>capturing фаза</strong>  и <strong>bubbling фаза</strong>, в зависимост каква фаза е подадена на event handler на детето.<br>
+                                Те определя в <stron>какъв ред</stron> елементите получават събитието.
+                        </p>
+                        <h2 id="scap">Capturing </h2> 
+                        <img src="capbub.png" width="35%" height="350px" style="float:right; margin-left:2.5%"> 
+                        <p>
+                                Браузърът проверява дали <strong>най-външният прародител</strong> на елемента има регистриран event handler за съответното събитие,и ако да, го изпълнява.<br>
+                                След това преминава към <strong>децата му</strong> и прави същото,докато стигне до елемента, върху който всъщност е извършено събитието.
+                                
+                        </p>
+                        <h2 id="sbub">Bubbling  </h2>  
+                        <p>
+                                Браузърът проверява дали елементът, <strong>върху който е събитието</strong> има нужният event handler и ако да, го изпълнява.<br>
+                                След това преминава към <strong>непосредственият му  предшественик</strong> и прави същото, докато стигне до &lt;html> елемента.                                
+                        </p>
+                   
+                        <h2 id="suse">Употреба  </h2>  
+                        <p>
+                                Коя от двете фази ще ползваме определяме чрез <strong>третия параметър</strong> на <br>
+                                <strong><i>addEventListener(event, function, useCapture);</i></strong><br><br>
+                                <strong>По подразбиране е bubbling</strong> – ако няма подаден трети параметър<br>
+                                <strong>capturing</strong>  ще имаме при <br>
+                                <code><strong>addEventListener(event, function, true);</strong></code> <br>
+                                 но тази фаза рядко се използва<br><br>
+                                
+                                Ако ни се наложи да <strong>спрем разпространяването</strong> на събитието, може да направи това чрез метод на Event обекта<br> <strong><i>event.stopPropagation();</i></strong>  <br> в някоя callback-функция .<br>
+                                <a href="#9">[1],[6]</a> 
+                        </p>
+
+                        <h2 id="sd">Event delegation </h2>  
+                        <p>
+                                Идеята е, че ако имаме <strong>много елементи</strong>,които обработваме по <strong>подобен начин</strong>,  вместо да присвояваме handler  на всеки от тях – може да поставим <strong>един единствен handler</strong> върху техният общ родител.<br>
+                                Така точният елемент може да обработим чрез <strong>event.target</strong>, но в този случай трябва да внимаваме при използване на <strong>stopPropagation();</strong>    за да не се получат „мъртви участъци“.<br>
+                                <a href="#9">[7]</a>
+                                <ins>С последният пример ще демонстрираме точно това</ins>
+                        </p>
+            </section>             
+        <p class="example" style="height: 50%; margin-top: 1%;">
+        <textarea >
+<!DOCTYPE html>
+<html >
+<head>
+    
+    <title>Color_table</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        table, td {
+            border: 1px solid black;
+        }
+        table {
+                width: 80%;
+                height:70%;
+                margin: auto;
+        }
+        
+        h1 {
+        text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Click away!</h1>
+    <table id="tab">
+        <tr>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td ></td>
+            <td ></td>
+        </tr> 
+    </table>
+
+    <script>
+    document.getElementById("tab").onclick = function(event) {
+        // къде е кликването
+        let target = event.target; 
+        // не се интересуваме , ако не е в TD
+        if (target.tagName != 'TD') return; 
+        //правим фона на кликнатият елемент произволен цвят
+        target.style.background="rgb(" + Math.random() * 256 + "," + Math.random() * 256 + "," +Math.random() * 256  + ")";  
+        };
+    </script>
+
+</body>
+</html>
+
+        </textarea>
+
+        <iframe 
+                width="50%"
+                height="50%"
+                src="example4\delegation.html">
+        </iframe>
+        </p> 
+        <h1 >Като заключение :</h1>
+        <p >
+                DOM ни позволява да боравим с елементи на страницата и тяхното съдържание чрез JavaScript и се
+                надявам  тази страница да ви дава добра основа за бъдеща работа с него.<br>
+                Ако проявявате интерес , допълнителни свойства и методи може да намерите в използваните ...
+                
+        </p>
+        <section id="9">
+                <h1>Ресурси:</h1>
+                <p>
+                    <ul>
+                        <li >[1] <a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank">https://www.w3schools.com/js/js_htmldom.asp</a></li>
+                        <li >[2] <a href="https://www.w3schools.com/jsref/dom_obj_all.asp" target="_blank">https://www.w3schools.com/jsref/dom_obj_all.asp</a></li>
+                        <li >[3] <a href="https://www.w3schools.com/jsref/dom_obj_event.asp" target="_blank">https://www.w3schools.com/jsref/dom_obj_event.asp</a> </liid="s">
+                        <li >[4] <a href="https://www.w3schools.com/jsref/dom_obj_style.asp" target="_blank">https://www.w3schools.com/jsref/dom_obj_style.asp</a> </li>
+                        <li >[5] <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events" target="_blank">https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events</a> </li>
+                        <li >[6] <a href="https://javascript.info/bubbling-and-capturing" target="_blank">https://javascript.info/bubbling-and-capturing</a> </li>
+                        <li >[7] <a href="https://javascript.info/event-delegation" target="_blank">https://javascript.info/event-delegation</a> </li>
+                        <li >[8] <a href="https://javascript.info/ui" target="_blank">https://javascript.info/ui</a> </li>
+                    </ul>
+                </p>
+        </section>  
+        <section id="10">
+            <h1>За мен:</h1>
+        </section>  
+
+    
+</body>
+</html>

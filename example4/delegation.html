@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html >
+<head>
+    
+    <title>Color_table</title>
+    <style>
+        html, body 
+    {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+        table, th, td 
+        {
+          border: 1px solid black;
+        }
+        table {
+                width: 80%;
+                height:70%;
+                margin: auto;
+              }
+      
+     h1
+     {
+        text-align: center;
+     }
+     
+    </style>
+</head>
+<body>
+    <h1>Click away!</h1>
+    <table id="tab">
+    <tr>
+      <td ></td>
+      <td ></td>
+      <td ></td>
+    </tr>
+    <tr>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+      </tr>
+      <tr>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+      </tr> 
+  </table>
+
+  <script>
+  document.getElementById("tab").onclick = function(event) {
+  let target = event.target; // къде е кликването
+
+  if (target.tagName != 'TD') return; // не се интересуваме , ако не е в TD
+  target.style.background="rgb(" + Math.random() * 256 + "," + Math.random() * 256 + "," +Math.random() * 256  + ")";  //правим фона на кликнатият елемент произволен цвят
+  
+};
+  </script>
+
+</body>
+</html>
+
+

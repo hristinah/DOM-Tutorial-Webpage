@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+html, body 
+    {
+        height: 95%;
+        width: 100%;
+        margin: 0;
+        
+    }
+#container {
+  width: 80%;
+  height: 70%;
+  position: relative;
+
+}
+#animate {
+  width: 50%;
+  height: 80%;
+  position: absolute;
+  left: 65%;
+ } 
+</style>
+<body>
+
+<p><button onclick="myMove()">Come here!</button></p> 
+
+<div id ="container">
+  <img id ="animate" src="kitty-static.gif">
+</div>
+
+<script>
+function myMove() {
+  var cat = document.getElementById("animate"); 
+  var fish=document.createElement("img"); //създаваме възел fish който е img
+  fish.src="fish.gif";
+  fish.style.width= "15%";
+  fish.style.height= "15%";
+  fish.style.top= "20%";
+  fish.style.left= "5%";
+  fish.style.position="absolute";
+  fish.style.display="inline";
+  document.getElementById("container").insertBefore(fish, cat); //вмъкваме го в дървото
+  var pos = 65;
+  cat.setAttribute("src", "kittyrun.gif"); 
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos <= 20) {
+	cat.src="kitty-static.gif"; 
+	document.getElementById("container").removeChild(fish); //махаме го от дървото
+      clearInterval(id);
+    } else {
+      pos=pos-0.15; 
+      cat.style.left = pos + "%"; 
+    }
+   } 
+    
+  }
+  
+</script>
+
+</body>
+</html>

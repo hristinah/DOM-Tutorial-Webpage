@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+html, body 
+    {
+        height: 95%;
+        width: 100%;
+        margin: 0;
+        
+    }
+#container {
+  width: 80%;
+  height: 70%;
+  position: relative;
+
+}
+#animate {
+  width: 50%;
+  height: 80%;
+  position: absolute;
+  left: 65%;
+ } 
+ #pet { 
+  visibility: hidden;
+ }
+
+
+
+</style>
+<body>
+
+<p><button id="b">Come here!</button></p> 
+<p><button id="pet">Pet him</button></p> 
+
+<div id ="container">
+  <img id ="animate" src="kitty-static.gif">
+</div>
+
+<script>
+
+
+function myMove1() {                    
+  var cat = document.getElementById("animate"); 
+  var fish=document.createElement("img"); 
+  fish.src="fish.gif";
+  fish.style.width= "15%";
+  fish.style.height= "15%";
+  fish.style.top= "20%";
+  fish.style.left= "5%";
+  fish.style.position="absolute";
+  fish.style.display="inline";
+  document.getElementById("container").insertBefore(fish, cat); 
+  var pos = 65;
+  cat.setAttribute("src", "kittyrun.gif"); 
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos <= 20) {
+	cat.src="kitty-static.gif"; 
+	document.getElementById("container").removeChild(fish); 
+      clearInterval(id);
+    } else {
+      pos=pos-0.15; 
+      cat.style.left = pos + "%"; 
+    }
+   }
+ 
+  }
+
+function myMove2()
+{
+document.write("<button id='b'onclick='history.go(0)'>Refresh</button> <h1 id='h'>I don't like these games HUMAN !</h1>  <img id='i' src='madcat.jpg'  width='70%'  height='70%';> ");  
+document.getElementById('b').style.display="block";
+document.getElementById('b').style.margin="auto";
+document.getElementById('h').style.textAlign="center";
+document.getElementById('i').style.display="block";
+document.getElementById('i').style.margin="auto";
+}
+
+var numclicks=0; //колко пъти е натиснат бутона
+
+function myFunction()   // функцията, която се пуска при натискане на бутона
+{
+document.getElementById("pet").style.visibility = "visible";
+numclicks++;
+if(numclicks==1) {myMove1();}
+if(numclicks==3) {myMove2();}
+}
+
+document.getElementById("b").addEventListener("click", myFunction); //добавяме слушател за събитието click  бутон "come here"
+
+document.getElementById("pet").addEventListener('click', function() {  //махаме слушателя на  бутон "come here", ако натиснем "pet him" бутона
+  document.getElementById("b").removeEventListener("click", myFunction); 
+});
+
+</script>
+
+</body>
+</html>
